@@ -94,7 +94,6 @@ const BirdSightings: React.FC = () => {
   const [mapCenter, setMapCenter] = useState<[number, number]>([40.0, -74.0]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [selectedSighting, setSelectedSighting] = useState<BirdSighting | null>(null);
   const [locationCache, setLocationCache] = useState<Record<string, Location[]>>({});
   const [birdSearchCache, setBirdSearchCache] = useState<Record<string, any[]>>({});
   const [birdSuggestions, setBirdSuggestions] = useState<{ label: string; value: string }[]>([]);
@@ -115,7 +114,7 @@ const BirdSightings: React.FC = () => {
         setError(error.response?.data?.error || 'Failed to fetch location suggestions');
       }
     }, 500),
-    []
+    [setLocationSuggestions, setLocationCache, setError]
   );
 
   const handleLocationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -288,7 +287,6 @@ const BirdSightings: React.FC = () => {
   };
 
   const handleBirdSelect = (birds: string[]) => {
-    console.log('Bird selection changed:', birds); // Debug log
     setSelectedBirds(birds);
   };
 

@@ -26,7 +26,6 @@ const BirdSelector: React.FC<BirdSelectorProps> = ({ selectedBirds, onBirdSelect
   const [species, setSpecies] = useState<BirdSpecies[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState<string>('');
 
   // Debounced search function
   const debouncedSearch = React.useCallback(
@@ -58,17 +57,16 @@ const BirdSelector: React.FC<BirdSelectorProps> = ({ selectedBirds, onBirdSelect
         setLoading(false);
       }
     }, 300),
-    []
+    [setSpecies, setLoading, setError]
   );
 
   // Initial load of common species
   useEffect(() => {
     debouncedSearch('');
-  }, []);
+  }, [debouncedSearch]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value;
-    setSearchQuery(query);
     debouncedSearch(query);
   };
 
