@@ -1,5 +1,5 @@
 [build]
-  command = "cd client && npm install && npm run build"
+  command = "npm install && npm run build:full"
   publish = "client/build"
 
 [[redirects]]
@@ -9,4 +9,10 @@
 
 [build.environment]
   NODE_VERSION = "18"
-  NPM_VERSION = "9" 
+  NPM_VERSION = "9"
+
+# Handle API requests
+[[redirects]]
+  from = "/api/*"
+  to = "/server/index.js"
+  status = 200 
