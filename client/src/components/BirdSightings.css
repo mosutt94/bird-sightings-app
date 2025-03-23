@@ -1,0 +1,13 @@
+.ebird-link {
+  color: #2E5A1C;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+
+.ebird-link:hover {
+  color: #2E5A1C;
+  text-decoration: underline;
+} 
